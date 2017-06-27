@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Vue.js Tic Tac Toe by Zsolt Meszaros | Vue.js Challenge</title>
+  <link href="https://fonts.googleapis.com/css?family=Kalam:700|Source+Sans+Pro:400,700,900" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page" id="app">
+    <header class="page__header">
+      <div class="container">
+        <h1 class="page__title">Tic<span>Tac</span>Vue</h1>
+      </div>
+    </header>
+    <main v-cloak>
+      <div class="container v-cloak-hidden">
+        <div class="players">
+          <div :class="{player: true, 'player--active': xIsNext && !gameover}">
+            <span class="playerwhat">X</span> {{points.x}}pts
+          </div>
+          <div :class="{player: true, 'player--active': !xIsNext && !gameover}">
+            <span class="playerwhat">O</span> {{points.o}}pts
+          </div>
+        </div>
+        <div class="status">{{status}}</div>
+        <div class="board">
+          <div class="board__cells">
+            <button
+              :class="{
+                board__cell: true,
+                'board__cell--marked': cell,
+                'board__cell--o': cell === 'O'
+              }"
+              v-for="(cell, i) in cells"
+              :key="i"
+              @click="mark(i)"
+            >
+              {{cell}}
+            </button>
+          </div>
+        </div>
+        <button type="button" id="restart" class="btn btn--restart" @click="start">
+          {{buttonText}}
+        </button>
+      </div>
+    </main>
+    <footer class="page__footer">
+      <div class="container">
+        <p class="copyright">Made by <a class="copyright__link" href="https://zsolti.co" title="Zsolt Meszaros">Zsolt Meszaros</a> as part of his <a href="https://github.com/zsoltime/vue-basic-challenge" title="Vue Challenge">Vue Challenge</a> - Day&nbsp;#8</p>
+      </div>
+    </footer>
+  </div>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>
