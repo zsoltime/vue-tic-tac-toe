@@ -17,31 +17,43 @@
     <main v-cloak>
       <div class="container v-cloak-hidden">
         <div class="players">
-          <div :class="{player: true, 'player--active': xIsNext && !gameover}">
+          <div :class="{
+            player: true,
+            'player--active': xIsNext && !gameover
+          }">
             <span class="playerwhat">X</span> {{points.x}}pts
           </div>
-          <div :class="{player: true, 'player--active': !xIsNext && !gameover}">
+          <div :class="{
+            player: true,
+            'player--active': !xIsNext && !gameover
+          }">
             <span class="playerwhat">O</span> {{points.o}}pts
           </div>
         </div>
-        <div class="status">{{status}}</div>
+        <div class="status" role="alert">{{status}}</div>
         <div class="board">
           <div class="board__cells">
             <button
+              v-for="(cell, i) in cells"
+              :key="i"
               :class="{
                 board__cell: true,
                 'board__cell--marked': cell,
-                'board__cell--o': cell === 'O'
+                'board__cell--o': cell === 'o'
               }"
-              v-for="(cell, i) in cells"
-              :key="i"
+              :disabled="cell"
               @click="mark(i)"
             >
-              {{cell}}
+              <span>{{cell}}</span>
             </button>
           </div>
         </div>
-        <button type="button" id="restart" class="btn btn--restart" @click="start">
+        <button
+          type="button"
+          class="btn btn--restart"
+          ref="startBtn"
+          @click="start"
+        >
           {{buttonText}}
         </button>
       </div>
